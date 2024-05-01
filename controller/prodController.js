@@ -66,3 +66,20 @@ export const Update = async(req, res)=>{
         res.status(500).json({error:error});
     }
 }
+
+
+// new api to delete specific record using its unique id 
+
+export const deleteProd = async(req, res)=>{
+    try {
+        const id = req.params.id;
+        const prodExist= await Prod.findById(id);
+        if(!prodExist){
+            res.status(404).json({msg: "Prod not found"})
+        }
+        await Prod.findByIdAndDelete(id);
+        res.status(200).json({msg: "Record Deleted Successfully"});
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}
