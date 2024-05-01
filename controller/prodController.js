@@ -49,3 +49,20 @@ export const getOne = async(req, res)=>{
         res.status(500).json({error: error})
     }
 }  
+
+//new api to Update specific record using its unique id 
+
+export const Update = async(req, res)=>{
+    try {
+        const id = req.params.id;
+        const prodExist= await Prod.findById(id);
+        if(!prodExist){
+            res.status(404).json({msg: "Prod not found"})
+        }
+        // we used Prod here because we want to update record it will call the model fields
+        const updatedData = await Prod.findByIdAndUpdate(id, req.body, {new: true});
+        res.status(200).json(updatedData);
+    } catch (error) {
+        res.status(500).json({error:error});
+    }
+}
