@@ -1,7 +1,7 @@
 // creating apis it will be intecratcing with db taking data from controller and controller takes data from frontend
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const prodSchema = new mongoose.Schema({
     prodname: {
       type: String,
       required: [true, "Product name is required"],
@@ -16,4 +16,4 @@ const userSchema = new mongoose.Schema({
     },
   });
   
-export default mongoose.model("User", userSchema);
+export default mongoose.model("Prod", prodSchema);
