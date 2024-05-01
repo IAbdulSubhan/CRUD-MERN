@@ -35,3 +35,17 @@ export const getAll = async(req, res)=>{
 
 
 //new api to get specific record using its uniqu id 
+
+export const getOne = async(req, res)=>{
+    try {
+        const id = req.params.id;
+        const prodExist = await Prod.findById(id);
+        if(!prodExist){
+            res.status(404).json({msg: "Product not Found"})
+        }
+        res.status(200).json(prodExist);
+
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+}  
