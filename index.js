@@ -1,10 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import bodyParser from 'body-parser';
-import dotenv from "dotEnv";
+import bodyParser from "body-parser"
+import dotenv from "dotenv";
 import cors from "cors";
-import { error } from "console";
-
+import route from "./routes/userRoute.js";
 
 const app = express();
 app.use(bodyParser.json());
@@ -16,10 +15,14 @@ const PORT = process.env.PORT || 7000;
 const URL = process.env.MONGOURL;
 
 mongoose.connect(URL).then(()=>{
-    console.log("DB connected Successfully");
+
+    console.log("DB connected successfully");
 
     app.listen(PORT, ()=>{
-        console.log(`Sever is running on ${PORT}`)
+        console.log(`Server is running on port: ${PORT}`);
     })
 
-}).catch(error=>console.log(error));
+}).catch(error => console.log(error));
+
+
+app.use("/api", route);
